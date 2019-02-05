@@ -5,7 +5,7 @@ function getEvents(keyword) {
 
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&dmaid=362&size=30&page=" + page,
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&size=30&page=" + page,
     async:true,
     dataType: "json",
     success: function(json) {
@@ -46,11 +46,10 @@ function checkIfUndefined(elementArr) {
 function showEvents(json) {
   let events = json._embedded.events;
   $('.results').remove();
-  $('.col-xs-7').append('<ul class="results"></ul>');
+  $('.col-xs-8').append('<ul class="results"></ul>');
   console.log(events);
 
   events.forEach(function (event){
-    debugger;
     let elementsArr = [event.images, event.name, event._embedded.venues, event.dates.start.localDate, event.dates.start.localTime, event.priceRanges];
     checkIfUndefined(elementsArr);
     //dependant
