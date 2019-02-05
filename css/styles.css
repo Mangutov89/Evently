@@ -1,15 +1,15 @@
 body, html {
-  display: block;
-  background-image: url('../img/crowd-bg2.jpg');
-  background-repeat: no-repeat;
+  background: url('../img/crowd-bg2.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
   background-size: cover;
-
 }
 
 h2  {
   text-align: center;
   font-family: 'Righteous', cursive;
-  margin-top: 350px;
+  margin-top: 300px;
   color: white;
 }
 
