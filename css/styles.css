@@ -9,16 +9,20 @@ body, html {
 h2  {
   text-align: center;
   font-family: 'Righteous', cursive;
-  margin-top: 300px;
+  margin-top: 200px;
   color: white;
+  text-shadow: 3px 3px #06007D;
+  font-size: 50px;
 }
 
 h1  {
   text-align: center;
   font-family: 'Righteous', cursive;
   font-size: 100px;
-  margin-top: 50px;
+  margin-top: 75px;
   color: white;
+  text-shadow: 3px 3px #06007D;
+  font-size: 117px;
 }
 
 .nav-item {
@@ -26,15 +30,14 @@ h1  {
   margin-right: 5px;
 }
 
-.brand-name {
-  font-size: 30px;
-  font-family: 'Righteous', cursive;
-}
-
+.brand-name,
 .navbar {
   font-size: 30px;
   font-family: 'Righteous', cursive;
+  text-shadow: 2px 2px black;
 }
+
+
 
 
 
@@ -56,7 +59,7 @@ body {
 
 
 element.style {
-    margin-top: 400px;
+    margin-top: 450px;
 }
 
 form{
