@@ -1,3 +1,16 @@
+ul {
+  list-style-type: none;
+}
+
+li {
+  max-width: 1200px;
+}
+
 .test {
   display: inline-block;
+}
+
+.test-image {
+  width: 218px;
+  height: 108px;
 }

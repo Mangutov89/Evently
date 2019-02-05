@@ -20,8 +20,11 @@ function getEvents(keyword) {
 
 
 function showEvents(json) {
-
-  console.log(json);
+  let events = json._embedded.events
+  events.forEach(function (event) {
+    console.log(event);
+  });
+  //console.log(events);
 
 }
 
