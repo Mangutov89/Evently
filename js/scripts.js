@@ -1,3 +1,21 @@
+// $(function () {
+//     var body = $('body');
+//     var backgrounds = [
+//       'url(img/crowd-bg2.jpg)',
+//       'url(img/megan.jpg)'];
+//     var current = 0;
+//
+//     function nextBackground() {
+//         body.css(
+//             'background',
+//         backgrounds[current = ++current % backgrounds.length]);
+//
+//         setTimeout(nextBackground, 5000);
+//     }
+//     setTimeout(nextBackground, 5000);
+//     body.css('background', backgrounds[0]);
+//     body.addClass('.image-settings');
+// });
 
 var page = 0;
 
