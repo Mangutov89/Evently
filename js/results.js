@@ -1,10 +1,11 @@
 var page = 0;
+var currentKey = '';
 
 function getEvents(keyword) {
 
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&size=30&page=" + page,
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&size=20&page=" + page,
     async:true,
     dataType: "json",
     success: function(json) {
@@ -41,7 +42,7 @@ function checkIfUndefined(elementArr) {
 
 function showEvents(json) {
   let events = json._embedded.events;
-  console.log(events);
+  console.log(json);
   $('.results').remove();
   $('.col-xs-8').append('<ul class="results"></ul>');
 
@@ -57,7 +58,7 @@ function showEvents(json) {
     let eventDate = elementsArr[3];
     let eventTime = elementsArr[4];
     let eventBooking = event.url;
-    console.log(eventBooking);
+    //console.log(eventBooking);
 
 
     let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
@@ -67,7 +68,30 @@ function showEvents(json) {
 
     // add list item
     $('.results').append('<a href="' + eventBooking + '"><li class="result-item hvr-grow"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li></a>');
+
+    pagination(json.page.totalPages);
   });
+}
+
+function pagination(pageTotal) {
+
+  let items = "";
+
+  for(let i=1; i<pageTotal+1; ++i) {
+
+    if(i === 1 && page !== 0) {
+      items += "<li class='page-num' id='prev'><a href='#'>previous</a></li>";
+    }
+    else if(i > 9) {
+      items += "<li class='page-num' id='dotdot'>...</li>";
+      items += "<li class='page-num'><a href='#'>" + pageTotal + "</a></li>";
+      items += "<li class='page-num' id='next'><a href='#'>next</a></li>";
+      break;
+    }
+    items += "<li class='page-num'><a href='#'>" + i + "</a></li>";
+  }
+
+  $("#page-list").html(items);
 }
 
 // When the user scrolls down 20px from the top of the document, show the button
@@ -87,17 +111,39 @@ function topFunction() {
   document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
+function addListeners() {
+
+  $("#page-list").on("click", "li", function() {
+    let temp = $(this).text();
+
+    if(temp === "next") {
+      ++page;
+    }
+    else if (temp === "previous") {
+      --page;
+    }
+    else {
+      page = $(this).text() - 1;
+    }
+    getEvents(currentKey);
+  });
+}
+
 
 
 $(document).ready(function () {
 
   // display search results when navigate to page
-  getEvents(localStorage.getItem("key"));
+  currentKey = localStorage.getItem("key");
+  getEvents(currentKey);
 
   $("#search").click(function() {
-    var keyword = $("#bar").val();
-        //console.log("hi");
-    getEvents(keyword);
+    currentKey = $("#bar").val();
+    getEvents(currentKey);
   });
+
+  //pagination page request
+  addListeners();
+
 
 });
