@@ -18,6 +18,10 @@ body {
   background-color: #2B2B2B;
 }
 
+h1 {
+  text-align: center;
+}
+
 h1,
 h4 {
   font-family: 'Righteous', cursive;
