@@ -61,35 +61,12 @@ function showEvents(json) {
     let eventDate = elementsArr[3];
     let eventTime = elementsArr[4];
 
-    //check images
-    let imageURL;
-    if (images !== '-') {
-      imageURL = event.images[0].url;
-    } else {
-      imageURL = '-'; //add place holder image so URL doesnt error out
-    }
 
-    //check venues
-    let venueName;
-    if(venues !== '-'){
-      venueName = event._embedded.venues[0].name;
-    } else {
-      venueName = '-';
-    }
+    let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
+    let venueName = (event._embedded.venues) ? event._embedded.venues[0].name :'-';
+    let priceMin = (event.priceRanges) ? event.priceRanges[0].min : '-';
+    let priceMax = (event.priceRanges) ? event.priceRanges[0].max : '-';
 
-    //check prices
-    let priceMin;
-    let priceMax;
-    if (priceRange !== '-') {
-      priceMin = event.priceRanges[0].min;
-      priceMax = event.priceRanges[0].max;
-    } else {
-      priceMin = '-';
-      priceMax = '-';
-    }
-
-    // debugger;
-    console.log(priceMin);
     // add list item
     $('.results').append('<li class="result-item"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li>');
   });
