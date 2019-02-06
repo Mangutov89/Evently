@@ -1,22 +1,3 @@
-// $(function () {
-//     var body = $('body');
-//     var backgrounds = [
-//       'url(img/crowd-bg2.jpg)',
-//       'url(img/megan.jpg)'];
-//     var current = 0;
-//
-//     function nextBackground() {
-//         body.css(
-//             'background',
-//         backgrounds[current = ++current % backgrounds.length]);
-//
-//         setTimeout(nextBackground, 5000);
-//     }
-//     setTimeout(nextBackground, 5000);
-//     body.css('background', backgrounds[0]);
-//     body.addClass('.image-settings');
-// });
-
 var page = 0;
 
 function getEvents(keyword) {
@@ -51,21 +32,18 @@ function convertTime(time) {
 }
 
 function checkIfUndefined(elementArr) {
-  debugger;
   for(let i = 0; i < elementArr.length; i++){
     if(elementArr[i] === undefined) {
       elementArr[i] = '-';
     }
   }
-  // elementArr.forEach(function (element) {
-  // });
 }
 
 function showEvents(json) {
   let events = json._embedded.events;
+  console.log(events);
   $('.results').remove();
   $('.col-xs-8').append('<ul class="results"></ul>');
-  console.log(events);
 
   events.forEach(function (event){
     let elementsArr = [event.images, event.name, event._embedded.venues, event.dates.start.localDate, event.dates.start.localTime, event.priceRanges];
@@ -78,6 +56,8 @@ function showEvents(json) {
     let eventName = elementsArr[1];
     let eventDate = elementsArr[3];
     let eventTime = elementsArr[4];
+    let eventBooking = event.url;
+    console.log(eventBooking);
 
 
     let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
@@ -86,11 +66,26 @@ function showEvents(json) {
     let priceMax = (event.priceRanges) ? event.priceRanges[0].max : '-';
 
     // add list item
-    $('.results').append('<li class="result-item"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li>');
+    $('.results').append('<a href="' + eventBooking + '"><li class="result-item hvr-grow"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li></a>');
   });
 }
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
 
+function scrollFunction() {
+  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
 
 
 $(document).ready(function () {
