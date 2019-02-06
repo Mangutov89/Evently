@@ -97,7 +97,6 @@ function showEvents(json) {
 $(document).ready(function () {
 
   // display search results when navigate to page
-  console.log(localStorage.getItem("key"));
   getEvents(localStorage.getItem("key"));
 
   $(".search").click(function() {
