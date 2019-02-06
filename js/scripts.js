@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function () {
 
   $("#landing-search").submit(function(e) {
