@@ -42,7 +42,7 @@ function checkIfUndefined(elementArr) {
 
 function showEvents(json) {
   let events = json._embedded.events;
-  console.log(json);
+  //console.log(events);
   $('.results').remove();
   $('.col-xs-8').append('<ul class="results"></ul>');
 
@@ -137,9 +137,10 @@ $(document).ready(function () {
   currentKey = localStorage.getItem("key");
   getEvents(currentKey);
 
-  $("#search").click(function() {
-    currentKey = $("#bar").val();
-    getEvents(currentKey);
+  $("#search").submit(function(e) {
+    e.preventDefault()
+    var keyword = $("#bar").val();
+    getEvents(keyword);
   });
 
   //pagination page request
