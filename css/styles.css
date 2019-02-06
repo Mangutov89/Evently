@@ -120,3 +120,7 @@ form:hover .fa{
     background: #07051a;
     color: white;
 }
+
+#hidden {
+  display: none;
+}
