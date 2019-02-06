@@ -94,7 +94,7 @@ $(document).ready(function () {
   // display search results when navigate to page
   getEvents(localStorage.getItem("key"));
 
-  $(".search").click(function() {
+  $("#search").click(function() {
     var keyword = $(".bar").val();
         //console.log("hi");
     getEvents(keyword);
