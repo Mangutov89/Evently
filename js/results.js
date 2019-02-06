@@ -41,7 +41,7 @@ function checkIfUndefined(elementArr) {
 
 function showEvents(json) {
   let events = json._embedded.events;
-  console.log(events);
+  //console.log(events);
   $('.results').remove();
   $('.col-xs-8').append('<ul class="results"></ul>');
 
@@ -57,7 +57,7 @@ function showEvents(json) {
     let eventDate = elementsArr[3];
     let eventTime = elementsArr[4];
     let eventBooking = event.url;
-    console.log(eventBooking);
+    //console.log(eventBooking);
 
 
     let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
@@ -94,9 +94,9 @@ $(document).ready(function () {
   // display search results when navigate to page
   getEvents(localStorage.getItem("key"));
 
-  $("#search").click(function() {
+  $("#search").submit(function(e) {
+    e.preventDefault()
     var keyword = $("#bar").val();
-        //console.log("hi");
     getEvents(keyword);
   });
 
