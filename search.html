@@ -5,6 +5,7 @@
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Days+One|Righteous" rel="stylesheet">
+    <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/page1-styles.css">
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
@@ -37,14 +38,26 @@
     <div class="container">
       <div class="header">
         <h1 id="title">Results in Portland</h1>
+        <!-- searchBar -->
+        <div class="input-group search-bar">
+          <input id="bar" type="text" class="form-control" placeholder="Search for...">
+          <span class="input-group-btn">
+            <button id="search" class="btn btn-secondary" type="button">Search</button>
+          </span>
+        </div><!-- /input-group -->
       </div>
-      <input id="bar" type="text" name="input">
-      <button id="search" type="button" name="button">Search</button>
       <br>
-      <div class="col-xs-8">
-        <ul class="results">
-          <!-- content added by search -->
-        </ul>
+      <br>
+      <div class="row">
+        <div class="col-xs-8">
+          <ul class="results">
+            <!-- content added by search -->
+          </ul>
+        </div>
+        <div class="col-xs-4">
+          <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+        </div>
       </div>
       <div id="arrows">
         <svg-icon><src href="img/si-glyph-arrow-thin-left.svg" /></svg-icon>
