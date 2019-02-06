@@ -7,6 +7,36 @@ li {
   white-space: nowrap;
 }
 
+.page-num {
+  display: inline-block;
+  color: #007bff;
+  padding: 5px;
+}
+
+.page-num a {
+  font-size: 25px;
+
+}
+
+#dotdot {
+  font-size: 25px;
+  color: #007bff;
+}
+
+#prev {
+  margin-right: 50px;
+}
+
+#next {
+  margin-left: 50px;
+}
+
+#page-container {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 200px;
+}
+
 a {
   color: inherit;
 }
