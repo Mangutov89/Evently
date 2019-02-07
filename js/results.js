@@ -125,7 +125,9 @@ function addListeners() {
       --page;
     }
     else {
-      page = temp - 1;
+      if(temp !== "...") {
+        page = temp - 1;
+      }
     }
     getEvents(currentKey);
   });
