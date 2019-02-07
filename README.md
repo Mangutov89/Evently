@@ -9,6 +9,19 @@ An event finder for local Portland events using the Ticketmaster API.
 * Open in browser of your choice
 * Edit files as desired
 
+## Description
+
+Use this webpage to search Portland, OR for artists, venues, and keywords like "music", "rap", "sports", "comedy" then you can purchase tickets thru Ticketmaster after clicking on a result.
+
+##### Home page
+
+<br>
+<img src="img/landing.png" alt="Home Page">
+
+##### Results page
+<br>
+<img src="img/results.png" alt="Results Page">
+
 
 ## Authors
 
@@ -36,6 +49,13 @@ Users can click "Top" button to send them back to top of the page | |
 * Search bar is not formatted properly for tablets.
 * Nav bar for mobile is not properly formatted/functional - does not cover page.
 
+## Acknowledgments
+
+* Thanks to [Menelaos](https://codepen.io/menelaosly/pen/rZddyb) for search bar design.
+* Grazie [Ticketmaster](https://developer.ticketmaster.com/) for concise API documentation.
+* Danke sehr [Potasmic](https://stackoverflow.com/users/2076075/potasmic) for localStorage workaround.
+* Domo Arigato [Travis](https://github.com/travisty12). You are awesome.
+
 ## License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -56,9 +76,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Acknowledgments
 
-* Thanks to [Menelaos](https://codepen.io/menelaosly/pen/rZddyb) for search bar design.
-* Grazie [Ticketmaster](https://developer.ticketmaster.com/) for concise API documentation.
-* Danke sehr [Potasmic](https://stackoverflow.com/users/2076075/potasmic) for localStorage workaround.
-* Domo Arigato [Travis](https://github.com/travisty12). You are awesome.
+Copyright (c) 2019 **_Leo Mangutov, Dino Nguyen, Justin Haupt, David Monarrez_**
