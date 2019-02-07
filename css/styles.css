@@ -35,18 +35,6 @@ h1  {
   font-family: 'Righteous', cursive;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* search bar */
 body {
 /*     padding: 0;
@@ -77,8 +65,9 @@ form{
     display: block; */
 }
 
+
 input{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;;
@@ -90,6 +79,11 @@ input{
     border-radius: 20px;
     padding: 0 20px;
 }
+
+.bar {
+  position: absolute;
+}
+
 
 .fa{
     box-sizing: border-box;
@@ -106,6 +100,11 @@ input{
     transition: all 2s;
 }
 
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 form:hover{
     /*width: 600px;*/
