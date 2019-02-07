@@ -154,6 +154,7 @@ $(document).ready(function () {
     var keyword = $("#bar").val();
     currentKey = keyword.replace(/[^0-9a-zA-Z\s]/g, '');
     getEvents(currentKey);
+    console.log(currentKey);
   });
 
   //pagination page request
