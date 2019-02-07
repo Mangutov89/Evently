@@ -44,7 +44,7 @@ function showEvents(json) {
   let events = json._embedded.events;
   //console.log(events);
   $('.results').remove();
-  $('.col-xs-8').append('<ul class="results"></ul>');
+  $('.col-xs-12').append('<ul class="results"></ul>');
 
   events.forEach(function (event){
     let elementsArr = [event.images, event.name, event._embedded.venues, event.dates.start.localDate, event.dates.start.localTime, event.priceRanges];
