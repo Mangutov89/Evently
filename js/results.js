@@ -5,7 +5,7 @@ function getEvents(keyword) {
 
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&size=20&page=" + page,
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&sort=date,asc&size=20&page=" + page,
     async:true,
     dataType: "json",
     success: function(json) {
@@ -95,7 +95,9 @@ function pagination(pageTotal) {
     else if(i > 9) {
       items += "<li class='page-num' id='dotdot'>...</li>";
       items += "<li class='page-num'><a href='#'>" + pageTotal + "</a></li>";
-      items += "<li class='page-num' id='next'><a href='#'>next</a></li>";
+      if((page+1) !== pageTotal) {
+        items += "<li class='page-num' id='next'><a href='#'>next</a></li>";
+      }
       break;
     }
     items += "<li class='page-num'><a href='#'>" + i + "</a></li>";
@@ -108,7 +110,7 @@ function pagination(pageTotal) {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+  if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
     document.getElementById("myBtn").style.display = "block";
   } else {
     document.getElementById("myBtn").style.display = "none";
@@ -133,7 +135,9 @@ function addListeners() {
       --page;
     }
     else {
-      page = $(this).text() - 1;
+      if(temp !== "...") {
+        page = temp - 1;
+      }
     }
     getEvents(currentKey);
   });
@@ -148,6 +152,7 @@ $(document).ready(function () {
   let keyword = localStorage.getItem("key");
   currentKey = keyword.replace(/[^0-9a-zA-Z\s]/g, '');
   getEvents(currentKey);
+  $("#search-result").text(currentKey);
 
   $("#search").submit(function(e) {
     e.preventDefault()
