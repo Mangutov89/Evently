@@ -2,6 +2,7 @@ ul {
   list-style-type: none;
 }
 
+
 li {
   max-width: 1200px;
   white-space: nowrap;
@@ -48,7 +49,7 @@ a {
 #title  {
   text-align: center;
   font-family: 'Righteous', cursive;
-  font-size: 50px;
+  font-size: 100px;
   margin-top: 50px;
   margin-bottom: 100px;
 }
@@ -87,7 +88,13 @@ a {
 .search-bar {
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 70%;
+}
+
+#bar,
+.btn {
+  font-size: 25px;
+  font-family: 'Righteous', cursive;
 }
 
 .hvr-grow {
@@ -118,7 +125,8 @@ a {
   background-color: #555; /* Set a background color */
   color: white; /* Text color */
   cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
+  padding: 10px 15px; /* Some padding */
   border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
+  font-size: 25px; /* Increase font size */
+  font-family: 'Righteous', cursive;
 }
