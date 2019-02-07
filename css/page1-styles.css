@@ -1,10 +1,17 @@
+/* For mobile phone: */
+.navbar {
+  width: 1100px;
+}
+
+@media only screen and (min-width: 768px) {
+/* For desktop */
 ul {
   list-style-type: none;
 }
 
 
 li {
-  max-width: 1200px;
+  max-width: 100%;
   white-space: nowrap;
 }
 
@@ -17,6 +24,15 @@ li {
 .page-num a {
   font-size: 25px;
 
+}
+
+#no-result{
+  display: none;
+  width: 100%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
 }
 
 #dotdot {
@@ -83,6 +99,7 @@ a {
 .navbar {
   font-size: 30px;
   font-family: 'Righteous', cursive;
+  width: 100%;
 }
 
 .search-bar {
@@ -128,4 +145,5 @@ a {
   border-radius: 10px; /* Rounded corners */
   font-size: 25px; /* Increase font size */
   font-family: 'Righteous', cursive;
+}
 }
