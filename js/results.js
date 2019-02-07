@@ -5,7 +5,7 @@ function getEvents(keyword) {
 
   $.ajax({
     type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&size=20&page=" + page,
+    url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&keyword=" + keyword + "&stateCode=OR&city=portland&sort=date,asc&size=20&page=" + page,
     async:true,
     dataType: "json",
     success: function(json) {
@@ -41,36 +41,46 @@ function checkIfUndefined(elementArr) {
 }
 
 function showEvents(json) {
-  let events = json._embedded.events;
-  //console.log(events);
-  $('.results').remove();
-  $('.col-xs-12').append('<ul class="results"></ul>');
+  try {
+    let events = json._embedded.events;
+    //console.log(events);
+    $('.results').remove();
+    $('.col-xs-12').append('<ul class="results"></ul>');
 
-  events.forEach(function (event){
-    let elementsArr = [event.images, event.name, event._embedded.venues, event.dates.start.localDate, event.dates.start.localTime, event.priceRanges];
-    checkIfUndefined(elementsArr);
-    //dependant
-    let images = elementsArr[0];
-    let venues = elementsArr[2];
-    let priceRange = elementsArr[5];
-    //independent
-    let eventName = elementsArr[1];
-    let eventDate = elementsArr[3];
-    let eventTime = elementsArr[4];
-    let eventBooking = event.url;
-    //console.log(eventBooking);
+    events.forEach(function (event){
+      let elementsArr = [event.images, event.name, event._embedded.venues, event.dates.start.localDate, event.dates.start.localTime, event.priceRanges];
+      checkIfUndefined(elementsArr);
+      //dependant
+      let images = elementsArr[0];
+      let venues = elementsArr[2];
+      let priceRange = elementsArr[5];
+      //independent
+      let eventName = elementsArr[1];
+      let eventDate = elementsArr[3];
+      let eventTime = elementsArr[4];
+      let eventBooking = event.url;
+      //console.log(eventBooking);
 
 
-    let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
-    let venueName = (event._embedded.venues) ? event._embedded.venues[0].name :'-';
-    let priceMin = (event.priceRanges) ? event.priceRanges[0].min : '-';
-    let priceMax = (event.priceRanges) ? event.priceRanges[0].max : '-';
+      let imageURL = (event.images) ? event.images[0].url : 'img/e-logo.png';
+      let venueName = (event._embedded.venues) ? event._embedded.venues[0].name :'-';
+      let priceMin = (event.priceRanges) ? event.priceRanges[0].min : '-';
+      let priceMax = (event.priceRanges) ? event.priceRanges[0].max : '-';
 
-    // add list item
-    $('.results').append('<a href="' + eventBooking + '"><li class="result-item hvr-grow"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li></a>');
+      // add list item
+      $('.results').append('<a href="' + eventBooking + '"><li class="result-item hvr-grow"><div class="test img-container"><img class="test-image" src="' + imageURL + '"</img></div> <div class="test test-content"><h2 class="event-title">' + eventName + '</h2><p class="event-description">' + venueName + '</p><p class="event-date">' + eventDate + '</p><p class="event-date">' + convertTime(eventTime) + '</p><p class="price">Prices From: $' + priceMin + ' to $' + priceMax + '</p></div></li></a>');
 
-    pagination(json.page.totalPages);
-  });
+      pagination(json.page.totalPages);
+      $("#page-container").show();
+      $("#no-result").hide();
+    });
+  }
+  catch(err) {
+    console.log(err);
+    $('.results').remove();
+    $("#no-result").show();
+    $("#page-container").hide();
+  }
 }
 
 function pagination(pageTotal) {
@@ -85,7 +95,9 @@ function pagination(pageTotal) {
     else if(i > 9) {
       items += "<li class='page-num' id='dotdot'>...</li>";
       items += "<li class='page-num'><a href='#'>" + pageTotal + "</a></li>";
-      items += "<li class='page-num' id='next'><a href='#'>next</a></li>";
+      if((page+1) !== pageTotal) {
+        items += "<li class='page-num' id='next'><a href='#'>next</a></li>";
+      }
       break;
     }
     items += "<li class='page-num'><a href='#'>" + i + "</a></li>";
@@ -98,7 +110,7 @@ function pagination(pageTotal) {
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+  if (document.body.scrollTop > 450 || document.documentElement.scrollTop > 450) {
     document.getElementById("myBtn").style.display = "block";
   } else {
     document.getElementById("myBtn").style.display = "none";
@@ -123,7 +135,9 @@ function addListeners() {
       --page;
     }
     else {
-      page = $(this).text() - 1;
+      if(temp !== "...") {
+        page = temp - 1;
+      }
     }
     getEvents(currentKey);
   });
@@ -131,16 +145,21 @@ function addListeners() {
 
 
 
+
 $(document).ready(function () {
 
   // display search results when navigate to page
-  currentKey = localStorage.getItem("key");
+  let keyword = localStorage.getItem("key");
+  currentKey = keyword.replace(/[^0-9a-zA-Z\s]/g, '');
   getEvents(currentKey);
+  $("#search-result").text(currentKey);
 
   $("#search").submit(function(e) {
     e.preventDefault()
     var keyword = $("#bar").val();
-    getEvents(keyword);
+    currentKey = keyword.replace(/[^0-9a-zA-Z\s]/g, '');
+    getEvents(currentKey);
+    $("#search-result").text(currentKey);
   });
 
   //pagination page request
